@@ -58,6 +58,10 @@
   cursor: pointer;
 }
 
+.body {
+  display: flex;
+}
+
 .sidebar {
   width: 200px;
   background-color: rgb(238, 238, 238);
