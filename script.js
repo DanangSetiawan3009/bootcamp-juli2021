@@ -2,7 +2,7 @@
 // snake case, contohnya full_name
 // camel case, contohnya fullName
 {
-    var name = "Admin Istr'ator"
+    let name = "Admin Istr'ator"
     let age = 19
     const address = 'Jaka"rta'
     let isAdmin = true
@@ -156,10 +156,140 @@ function clickButton() {
     console.log(password.value);
 }
 
+// perbandingan arrow function tanpa parameter
+// konvensional fn
+function fn1() {
+    console.log("ini fn1");
+    return 1
+}
+
+// anonymous fn
+const fn2 = function () {
+    console.log("ini fn2");
+    return 2
+}
+
+// arrow fn
+const fn3 = () => { // kurawal sebagai function 
+    console.log("ini fn3");
+    return 3
+}
+
+// perbandingan arrow function dengan parameter
+// anonymous dengan 1 param
+const fn21 = function (param1) {
+    console.log("ini fn21", param1);
+    return 2
+}
+// anonymous dengan 2 param
+const fn22 = function (param1, param2) {
+    console.log("ini fn21", param1, param2);
+    return 2
+}
+
+// arrow fn dengan return implisit
+const fn4 = () => 4
+// arrow fn dengan 1 param
+const fn41 = param1 => 4 + param1
+// arrow fn dengan 2 param
+const fn42 = (param1, param2) => 4 + param1 + param2
+// arrow fn dengan 2 param dan return object
+const fn43 = (param1, param2) => ({ // kurawal sebagai return object
+    param1,
+    paramKe2: param2
+})
+
+console.log(fn1())
+console.log(fn2())
+console.log(fn21("99999"))
+console.log(fn22("88888", 11111))
+console.log(fn3())
+console.log(fn4())
+console.log(fn41(90))
+console.log(fn42(88888, 11111))
+console.log(fn43(88888, 11111))
+
+
+// object & array destructuring
+const user = { // 0xff
+    name: "admin", // 0xf1
+    age: 21,
+    address: "Jakarta",
+    hobby: ["Football", "Swimming", "Listening Music", "Fishing"]
+}
+
+const name1 = user.name
+const age1 = user.age
+
+const { name, age, ...otherKey } = user
+console.log("name:", name);
+console.log("age:", age);
+console.log("key:", otherKey);
+console.log({ ...user });
+
+const [hobby1, hobby2, ...otherHobby] = user.hobby
+console.log("hobby1", hobby1);
+console.log("hobby2", hobby2);
+console.log("otherhobby", otherHobby);
+
+const userDetail2 = {
+    name: user.name,
+    age: user.age,
+    address: "Bogor",
+    hobby: user.hobby,
+}
+
+const userDetail3 = { ...user, address: "Depok" }
+console.log("user", user);
+console.log("userDetail", userDetail2);
+console.log("userDetail", userDetail3);
+
+const fn5 = () => {
+    return ["A", "B"]
+}
+const [ret1, ret2] = fn5()
+console.log("A", ret1);
+console.log("B", ret2);
+
+// this
+class Person {
+    age = 21
+
+    tmo = () => {
+        console.warn(this);
+
+        // assign sebuah variable
+        const self = this
+        setTimeout(function () {
+            console.log("============== tmo1");
+            console.log(this);
+            console.error(self);
+        }, 1000)
+
+        // binding function
+        setTimeout(function () {
+            console.log("============== tmo2");
+            console.log(this);
+        }.bind(this), 1000)
+
+        // arrow function
+        setTimeout(() => {
+            console.log("============== tmo3");
+            console.log(this);
+        }, 1000)
+    }
+}
+const P = new Person()
+P.tmo()
+
 /**
  * Latihan:
  *      - Buatlah halaman login sebagai halaman utama ketika membuka laman web
  *      - Ketika login dengan user&password tertentu, maka redirect ke halaman yang kalian miliki
  *          - dihalaman yang sama
  *          - tanpa refresh
+ *
+ * Latihan:
+ *      - Buatlah tampilan register
+ *      - Buatlah tampilan list user yang sudah register
  */
