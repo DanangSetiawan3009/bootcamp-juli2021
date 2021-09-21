@@ -53,7 +53,8 @@
   padding: 10px 20px;
 }
 
-.navbar .menu:hover {
+.navbar .menu:hover,
+.navbar .menu.selected {
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }

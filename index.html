@@ -6,8 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+
+      #id1 {
+        background-color: red;
+      }
+
+      .class1 {
+        background-color: blue;
+      }
+
+      [data-type] {
+        background-color: aqua;
+      }
+
+      [data-type="oke"] {
+        background-color: yellow;
+      }
+
+      .menu1 {
+        background-color: tomato;
+        margin: 50px 0;
+      }
+
+      .menu1 .submenu2:nth-of-type(odd) {
+        background-color: violet;
+      }
+
+      .menu1 .submenu2:nth-of-type(even) {
+        background-color: yellowgreen;
+      }
+
+      .menu1 .big {
+        font-size: 30px;
+      }
+
+      .bgBlack {
+        background-color: black !important;
+        color: white !important;
+      }
+
+      a:link {
+        color: white;
+      }
+
+      .test {
+        display: none;
+        /* visibility: hidden; */
+      }
+    </style>
   </head>
   <body>
+    <div class="test">
+      <div id="id1">ini id1</div>
+      <div class="class1">ini class1</div>
+      <div data-type="oke">ini atribut bebas</div>
+      <div data-type="tidakoke">ini atribut bebas</div>
+
+      <div class="menu1">
+        <div class="submenu">submenu 1</div>
+        <div class="submenu3">
+          <div class="submenu2">submenu2</div>
+          <div class="submenu2 big">submenu2</div>
+          <div class="submenu2">submenu2</div>
+          <div class="submenu2">submenu2</div>
+          <div class="submenu">submenu</div>
+        </div>
+      </div>
+    </div>
     <div class="header">
       <div class="menu-container">
         <div class="logo"></div>
@@ -19,11 +89,11 @@
         <div class="button-login">Log in</div>
       </div>
     </div>
-    <div class="navbar">
-      <div class="menu">Home</div>
-      <div class="menu">HTML</div>
-      <div class="menu">CSS</div>
-      <div class="menu">JavaScript</div>
+    <div class="navbar" id="navbar">
+      <div class="menu selected" onclick="selectMenu(this)">Home</div>
+      <div class="menu" onclick="selectMenu(this)">HTML</div>
+      <div class="menu" onclick="selectMenu(this)">CSS</div>
+      <div class="menu" onclick="selectMenu(this)">JavaScript</div>
     </div>
     <div class="body">
       <div class="sidebar">
@@ -36,7 +106,17 @@
         <div class="submenu">&lt;!DOCTYPE></div>
         <div class="submenu">&lt;a></div>
       </div>
-      <div class="content">ini content</div>
+      <div class="content">
+        <form name="form1">
+          <label for="username">Username</label>
+          <input id="username" name="username" type="text" />
+          <br />
+          <span>Password</span>
+          <input name="password" type="password" />
+          <br />
+          <input type="button" onclick="clickButton()" value="Click" />
+        </form>
+      </div>
     </div>
   </body>
 </html>
