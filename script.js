@@ -158,7 +158,7 @@ function clickButton() {
 
 /**
  * Latihan:
- *      - Buatlah halaman login sebagai halaman utama ketika membuat web
+ *      - Buatlah halaman login sebagai halaman utama ketika membuka laman web
  *      - Ketika login dengan user&password tertentu, maka redirect ke halaman yang kalian miliki
  *          - dihalaman yang sama
  *          - tanpa refresh
