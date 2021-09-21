@@ -290,6 +290,16 @@ P.tmo()
  *          - tanpa refresh
  *
  * Latihan:
- *      - Buatlah tampilan register
+ *      - Buatlah tampilan register, yang memiliki field sebagai berikut:
+ *          - nama
+ *          - username
+ *          - password
+ *          - jenis kelamin (radio)
+ *          - agama (dropdown list) - select-option
+ *          - hobby (select box)
+ *          - alamat
  *      - Buatlah tampilan list user yang sudah register
+ *      - Optional:
+ *          - buat pagination/halaman
+ *          - 1 halaman menampilkan 5 data
  */
