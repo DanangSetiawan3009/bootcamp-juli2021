@@ -296,7 +296,7 @@ P.tmo()
  *          - password
  *          - jenis kelamin (radio)
  *          - agama (dropdown list) - select-option
- *          - hobby (select box)
+ *          - hobby (check box)
  *          - alamat
  *      - Buatlah tampilan list user yang sudah register
  *      - Optional:
