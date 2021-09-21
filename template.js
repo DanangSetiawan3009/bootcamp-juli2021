@@ -64,3 +64,116 @@ const __init = () => {
     selectMenu("home")
 }
 __init()
+
+
+// callback
+const calc = (param1, cb) => {
+    const tolongHitungDulu = 50 * param1
+    return cb(tolongHitungDulu)
+}
+// callback
+const calc2 = (cb) => {
+    const tolongHitungDulu = 50 * 3
+    return cb(tolongHitungDulu, 45, "asdf")
+}
+
+const sum = param1 => param1 ** 4
+const dec = param1 => param1 ** 4 - 100
+
+console.log(calc(3, sum))
+console.log(calc(3, param => console.log(param)))
+console.log(calc(3, dec))
+console.log(calc2(dec))
+calc2((param1, param2, param3) => {
+    console.log(param1 ** 4 - 100)
+    console.log(param2);
+    console.log(param3);
+})
+
+
+// array methods
+let users = ["satu", 2, "tiga", true]
+console.warn("users:", users);
+
+// tambah di akhir
+users.push("tujuh7")
+console.log("users:", users);
+
+// tambah di awal
+users.unshift(0)
+console.log("users:", users);
+
+// hapus di awal
+users.shift()
+console.log("users:", users);
+
+// hapus di akhir
+users.pop()
+console.log("users:", users);
+
+// hapus
+users.splice(1, 2)
+console.log("users:", users);
+
+// update
+users.splice(1, 0, "DUA")
+console.log("users:", users);
+users.splice(1, 1, 2)
+console.log("users:", users);
+users.splice(1, 3, "DIGANTI")
+console.log("users:", users);
+delete users[0]
+console.log("users:", users);
+
+const person = {
+    name: "Admin",
+    age: 21
+}
+console.warn(person);
+person.address = "Jakarta"
+console.log(person);
+delete person.age
+console.log(person);
+
+
+users = [{
+    name: "Admin",
+    age: 21,
+    address: "Jakarta"
+}, {
+    name: "User",
+    age: 22,
+    address: "Bogor"
+}, {
+    name: "Operator",
+    age: 25,
+    address: "Depok"
+}]
+
+console.table(users)
+console.time("FOR")
+for (let index = 0; index < users.length; index++) {
+    const user = users[index];
+    console.warn("index:", index)
+    console.log("user:", user)
+}
+console.timeEnd("FOR")
+
+console.time("FOREACH")
+users.forEach((user, index) => {
+    console.error("index:", index)
+    console.log("user:", user)
+})
+console.timeEnd("FOREACH")
+
+// ada yang beralamat di bogor ga?
+let result = users.find(user => user.address === "Bogor")
+console.log(result)
+
+result = users.filter(user => user.age > 21)
+console.table(result)
+
+result = users.map((user, index) => {
+    return `Nama user ke ${index + 1} adalah ${user.name}`
+})
+console.log(result)
