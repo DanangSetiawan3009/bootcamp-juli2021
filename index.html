@@ -109,7 +109,18 @@
         <div class="submenu">&lt;a></div>
       </div>
       <div class="content">
-        <section data-section-content="user">ini user list</section>
+        <section data-section-content="user">
+          <table border="1" cellpadding="10px">
+            <thead>
+              <tr>
+                <th width="20px">No</th>
+                <th width="200px">Username</th>
+                <th width="10px">Gender</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
         <section data-section-content="register">
           <form name="form1">
             <label for="username">Username</label>
@@ -118,7 +129,11 @@
             <span>Password</span>
             <input name="password" type="password" />
             <br />
-            <input type="button" value="Click" />
+            <span>Gender</span>
+            <input name="gender" type="radio" value="male" /> Male
+            <input name="gender" type="radio" value="female" /> Female
+            <br />
+            <input type="button" data-submit="form" value="Click" />
           </form>
         </section>
       </div>

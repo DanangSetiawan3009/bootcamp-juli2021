@@ -17,17 +17,19 @@ const changeContent = selector => {
     //     document.querySelector(`[data-section-content='${selector}']`).classList.add("show")
 
     document.querySelector(`[data-section-content='${selector}']`)?.classList.add("show")
-    if (selector === "user") showUser()
+    // if (selector === "user") showUser()
 }
 
 const addEvent = () => {
     document.addEventListener("click", e => {
-        console.log(e);
+        // console.log(e.target.getAttribute("data-submit"));
         if (e.target.getAttribute("data-menu")) {
             const dataMenu = e.target.getAttribute("data-menu")
             // selectMenu("[data-menu='" + dataMenu + "']")
             selectMenu(dataMenu)
         }
+
+        if (e.target.getAttribute("data-submit")) saveData()
     })
 }
 
@@ -54,16 +56,6 @@ const showUser = () => {
         section.innerHTML += `<h1>${user.name}</h1>`
     })
 }
-
-const __init = () => {
-    const a = "asdf"
-    console.log("ghjk " + a + " ghjk")
-    console.log(`ghjk ${a} ghjk`)
-
-    addEvent()
-    selectMenu("home")
-}
-__init()
 
 
 // callback
@@ -139,15 +131,18 @@ console.log(person);
 users = [{
     name: "Admin",
     age: 21,
-    address: "Jakarta"
+    address: "Jakarta",
+    gender: "Male"
 }, {
     name: "User",
     age: 22,
-    address: "Bogor"
+    address: "Bogor",
+    gender: "Female"
 }, {
     name: "Operator",
     age: 25,
-    address: "Depok"
+    address: "Depok",
+    gender: "Male"
 }]
 
 console.table(users)
@@ -177,3 +172,45 @@ result = users.map((user, index) => {
     return `Nama user ke ${index + 1} adalah ${user.name}`
 })
 console.log(result)
+
+users = []
+// update user list
+const updateUserList = () => {
+    document.querySelector('table>tbody').innerHTML = ""
+    for (let index = 0; index < users.length; index++) {
+        const user = users[index]
+        document.querySelector('table>tbody').innerHTML += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${user.name}</td>
+            <td style="text-transform: capitalize;">${user.gender}</td>
+        </tr>
+        `
+    }
+}
+
+// save data
+const saveData = () => {
+    const username = document.querySelector("[name='username']").value
+    const password = document.querySelector("[name='password']").value
+    const gender = document.querySelector("[name='gender']:checked")?.value
+
+    users.push({
+        name: username,
+        password,
+        gender
+    })
+    selectMenu("user")
+    updateUserList()
+}
+
+const __init = () => {
+    const a = "asdf"
+    console.log("ghjk " + a + " ghjk")
+    console.log(`ghjk ${a} ghjk`)
+
+    addEvent()
+    selectMenu("register")
+    updateUserList()
+}
+__init()

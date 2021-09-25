@@ -82,6 +82,10 @@
   cursor: pointer;
 }
 
+.content {
+  padding: 20px;
+}
+
 [data-section-content] {
   display: none;
 }

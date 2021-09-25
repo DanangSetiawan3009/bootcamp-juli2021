@@ -299,7 +299,6 @@ P.tmo()
  *          - hobby (check box)
  *          - alamat
  *      - Buatlah tampilan list user yang sudah register
- *      - Optional:
- *          - buat pagination/halaman
+ *      - Buat pagination/halaman:
  *          - 1 halaman menampilkan 5 data
  */
