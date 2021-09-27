@@ -98,4 +98,6 @@ callAPI()
  *          - email
  *          - city (address)
  *      - tampilan table user ada action untuk edit dan delete
+ *      - untuk menambah data (add), gunakan fitur registrasi
+ *      - pagination, perhalaman 5 data
  */
