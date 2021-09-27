@@ -8,6 +8,7 @@ function selectMenu(selector) {
     document.querySelector(`[data-menu='${selector}']`)?.classList.add("selected")
     changeContent(selector)
 }
+// selectMenu("register")
 
 const changeContent = selector => {
     let menus = document.querySelectorAll("[data-section-content]")
@@ -32,6 +33,7 @@ const addEvent = () => {
         if (e.target.getAttribute("data-submit")) saveData()
     })
 }
+// addEvent()
 
 const showUser = () => {
     const userList = [{
@@ -173,21 +175,39 @@ result = users.map((user, index) => {
 })
 console.log(result)
 
-users = []
+// users = []
 // update user list
 const updateUserList = () => {
+    /*
     document.querySelector('table>tbody').innerHTML = ""
     for (let index = 0; index < users.length; index++) {
         const user = users[index]
+        const hobbies = ["Futsal", "Badminton"]
+
         document.querySelector('table>tbody').innerHTML += `
         <tr>
             <td>${index + 1}</td>
             <td>${user.name}</td>
             <td style="text-transform: capitalize;">${user.gender}</td>
+            <td style="text-transform: capitalize;">${hobbies.join(" & ")}</td>
         </tr>
         `
     }
+    */
+    const htmlUsers = users.map((user, idx) => {
+        const hobbies = ["Futsal", "Badminton"]
+        return `
+        <tr>
+            <td>${idx + 1}</td>
+            <td>${user.name}</td>
+            <td style="text-transform: capitalize;">${user.gender}</td>
+            <td style="text-transform: capitalize;">${hobbies.join(" & ")}</td>
+        </tr>
+        `
+    })
+    document.querySelector('table>tbody').innerHTML = htmlUsers.join("")
 }
+// updateUserList()
 
 // save data
 const saveData = () => {
@@ -205,10 +225,6 @@ const saveData = () => {
 }
 
 const __init = () => {
-    const a = "asdf"
-    console.log("ghjk " + a + " ghjk")
-    console.log(`ghjk ${a} ghjk`)
-
     addEvent()
     selectMenu("register")
     updateUserList()
