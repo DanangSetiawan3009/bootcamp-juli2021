@@ -68,6 +68,69 @@ const fn2 = async () => {
         .then(response => response.json())
 }
 
+const paginationConfig = {
+    dataPerPage: 5,
+    currentPage: 0
+}
+
+const generateList = () => {
+    const table = document.querySelector("table > tbody")
+
+    /**
+     *  halaman 1: 0 - 4
+     *  halaman 2: 5 - 9, dst
+     *  (1=0, 2=5, 3=10, ..., 7=30 (n-1)*5 )
+     *  (1=1, 2=6, 3=11, ..., 7=31 (n-1)*5 + 1)
+     */
+
+    const totalData = users2.length
+
+    /**
+     if (paginationConfig.currentPage > 0) {
+         const currentPage = paginationConfig.currentPage
+     } else {
+         const currentPage = 1
+     }
+     */
+    const currentPage = (paginationConfig.currentPage > 0) ? paginationConfig.currentPage : 1
+
+    let startNo = (currentPage - 1) * paginationConfig.dataPerPage
+    const endNo = currentPage * paginationConfig.dataPerPage
+    const dataSelected = users2.slice(
+        startNo, // start index
+        endNo // end index
+    )
+
+    table.innerHTML = ""
+    dataSelected.forEach((user, idx) => {
+        table.innerHTML += `
+            <tr>
+                <td width="20px">${startNo += 1}</td>
+                <td width="200px">${user.name}</td>
+                <td width="10px">${user.email}</td>
+                <td>${user.address.city}</td>
+            </tr>
+        `
+    });
+    generatePagination(totalData, paginationConfig.dataPerPage, currentPage)
+}
+
+const generatePagination = (totalData, dataPerPage, currentPage) => {
+    const pagination = document.querySelector('.pagination')
+    pagination.innerHTML = ""
+    for (let index = 1; index <= Math.ceil(totalData / dataPerPage); index++) {
+        const selected = index === currentPage ? "selected" : ""
+        pagination.innerHTML += `
+            <div class="page-no ${selected}" onclick="goToPage(${index})">${index}</div>
+        `
+    }
+}
+
+const goToPage = page => {
+    paginationConfig.currentPage = page
+    generateList()
+}
+
 const callAPI = async () => {
     console.warn("diatas fn1");
     console.time("FN1")
@@ -79,9 +142,10 @@ const callAPI = async () => {
     console.warn("diatas fn2");
     console.time("FN2")
     users2 = await fn2()
-    // console.log("user2 length:", users2.length);
+    console.log("user2 length:", users2.length);
     console.log(users2[0]);
     console.timeEnd("FN2")
+    generateList()
 }
 callAPI()
 

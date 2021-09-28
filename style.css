@@ -93,3 +93,22 @@
 [data-section-content].show {
   display: block;
 }
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.page-no {
+  border: 1px solid gray;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.page-no.selected {
+  background-color: lightgray;
+}
