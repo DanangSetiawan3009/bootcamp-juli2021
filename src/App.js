@@ -36,4 +36,9 @@ export default App
 /**
  * Tugas:
  *      - Convert web list user ke dalam React (tanpa jsonplaceholder/data html biasa)
+ *
+ * Latihan:
+ *      - Buat Home page
+ *      - Buat form login
+ *          - user "admin" dan password "1234" make redirect ke home, selain itu alert "Salah username / password"
  */
