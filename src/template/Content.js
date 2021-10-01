@@ -6,7 +6,7 @@ class Content extends Component {
         this.state = {
             counter: 0,
             username1: "",
-            password: ""
+            password: "",
         }
     }
 
@@ -35,32 +35,43 @@ class Content extends Component {
     }
 
     render() {
-        return (
-            <div style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column"
-            }}>
-                <div>
-                    <div>{this.state.username1}</div>
-                    <div>{this.state.password}</div>
-                    <button onClick={this.changeButton}>5</button>
-                    <span>{this.state.counter}</span>
-                    <button onClick={this.plusOneButton}>+1</button>
-                </div>
-                <div>
+        if (this.props.menu === "home") {
+            return (
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column"
+                }}>
                     <div>
-                        <span>Username</span>
-                        <input type="text" name="username1" onChange={this.updateUsername} />
+                        <div>{this.state.username1}</div>
+                        <div>{this.state.password}</div>
+                        <button onClick={this.changeButton}>5</button>
+                        <span>{this.state.counter}</span>
+                        <button onClick={this.plusOneButton}>+1</button>
                     </div>
                     <div>
-                        <span>Password</span>
-                        <input type="password" name="password" onChange={this.updateUsername} />
+                        <div>
+                            <span>Username</span>
+                            <input type="text" name="username1" onChange={this.updateUsername} />
+                        </div>
+                        <div>
+                            <span>Password</span>
+                            <input type="password" name="password" onChange={this.updateUsername} />
+                        </div>
                     </div>
-                </div>
-            </div >
-        );
+                </div >
+            );
+        }
+
+        if (this.props.menu === "contact") {
+            return <>
+                <h1>Contact</h1>
+                <button onClick={() => this.props.goToPage("home")}>Go To Home</button>
+            </>
+        }
+
+        return <h1>Log In</h1>
     }
 }
 

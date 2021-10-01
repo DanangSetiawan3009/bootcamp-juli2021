@@ -9,7 +9,11 @@ class Menu extends Component {
     }
     render() {
         return (
-            <div className="menu" style={{ backgroundColor: this.props.color }}>
+            <div
+                className="menu"
+                style={{ backgroundColor: this.props.color }}
+                onClick={this.props.fn}
+            >
                 {this.props.children}
             </div>
         );
