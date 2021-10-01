@@ -18,3 +18,8 @@ class App extends Component {
 }
 
 export default App
+
+/**
+ * Tugas:
+ *      - Convert web list user ke dalam React (tanpa jsonplaceholder/data html biasa)
+ */

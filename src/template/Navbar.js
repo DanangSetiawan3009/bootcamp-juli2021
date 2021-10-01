@@ -5,7 +5,9 @@ import Menu from '../components/menu';
 class Navbar extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+
+        }
     }
     render() {
         return (
@@ -16,9 +18,9 @@ class Navbar extends Component {
                 gap: 10,
                 alignItems: "center"
             }}>
-                <Menu>Home</Menu>
-                <Menu>Contact</Menu>
-                <Menu>Log In</Menu>
+                <Menu color="red">Home</Menu>
+                <Menu color="green">Contact</Menu>
+                <Menu color="blue">Log In</Menu>
             </div>
         );
     }

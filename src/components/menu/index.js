@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "./menu.css"
 
 
 class Menu extends Component {
@@ -8,11 +9,7 @@ class Menu extends Component {
     }
     render() {
         return (
-            <div style={{
-                border: "1px solid red",
-                padding: "10px 20px",
-                borderRadius: 4
-            }}>
+            <div className="menu" style={{ backgroundColor: this.props.color }}>
                 {this.props.children}
             </div>
         );
