@@ -20,11 +20,19 @@ class Login extends Component {
         })
     }
 
+    resetForm = () => {
+        this.setState({
+            username: "",
+            password: ""
+        })
+    }
+
     loginButton = () => {
         const { username, password } = this.state
-        if (username === "admin" && password === "1234")
+        if (username === "admin" && password === "1234") { // Bagaimana caranya me-reset value input ketika login success
             this.setState({ isLogin: true })
-        else alert("Invalid username or password!!")
+            this.resetForm()
+        } else alert("Invalid username or password!!")
     }
 
     render() {
@@ -42,12 +50,14 @@ class Login extends Component {
                         type="text"
                         name="username"
                         change={this.setValue}
+                        valueState={this.state.username}
                     />
                     <RowInput
                         label="Password"
                         type="password"
                         name="password"
                         change={this.setValue}
+                        valueState={this.state.password}
                     />
                     <div className="row-button">
                         <button onClick={this.loginButton}>Log In</button>

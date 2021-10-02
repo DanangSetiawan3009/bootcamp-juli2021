@@ -5,55 +5,58 @@ class Contact extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            shape: "0"
+            data: [{
+                username: "Admin",
+                address: "Jakarta"
+            }, {
+                username: "User",
+                address: "Bogor"
+            }, {
+                username: "Operator",
+                address: "Depok"
+            }]
         }
     }
 
-    changeShape = () => {
-        if (this.state.shape === "0") {
-            this.setState({
-                shape: "50%"
-            })
-        } else {
-            this.setState({
-                shape: "0"
-            })
+    addButton = () => {
+        const obj = {
+            username: "Operator 1",
+            address: "Tangerang"
         }
 
-        this.setState(oldState => {
-            console.log(oldState);
-            if (oldState.shape === "0")
-                return {
-                    shape: "50%"
-                }
-
-            return {
-                shape: "0"
-            }
+        const newData = this.state.data
+        newData.push(obj)
+        this.setState({
+            data: newData
         })
+    }
 
-        this.setState(oldState => {
-            return {
-                shape: oldState.shape === "0" ? "50%" : "0"
-            }
+    renderList = () => {
+        return this.state.data.map((user, idx) => {
+            return <tr key={idx}>
+                <td>{idx + 1}</td>
+                <td>{user.username}</td>
+                <td>{user.address}</td>
+            </tr>
         })
-
-        this.setState(oldState => ({
-            shape: oldState.shape === "0" ? "50%" : "0"
-        }))
     }
 
     render() {
         return (
             <>
-                <div style={{
-                    width: 50,
-                    height: 50,
-                    border: "1px solid red",
-                    marginLeft: 400,
-                    borderRadius: this.state.shape
-                }} />
-                <button onClick={this.changeShape}>Change Shape</button>
+                <table width="100%" border="1px" cellPadding="10px">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Username</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderList()}
+                    </tbody>
+                </table>
+                <button onClick={this.addButton}>Add Data</button>
             </>
         );
     }

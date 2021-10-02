@@ -17,7 +17,7 @@ class RowInput extends Component {
         // console.log(address);
         // const label = this.props.label
         // const type = this.props.type
-        const { label, type, name, change } = this.props
+        const { label, type, name, change, valueState } = this.props
         return (
             <div className="row-input">
                 <span>{label}</span>
@@ -25,6 +25,7 @@ class RowInput extends Component {
                     type={type}
                     name={name}
                     onChange={change}
+                    value={valueState}
                 />
             </div>
         );
