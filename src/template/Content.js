@@ -1,77 +1,22 @@
 import React, { Component } from 'react';
+import { Home, Contact, Login } from "../pages"
+
 
 class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            counter: 0,
-            username1: "",
-            password: "",
         }
-    }
-
-    changeButton = () => {
-        this.setState({
-            counter: 5,
-            username: "Admin 5",
-        })
-    }
-
-    plusOneButton = () => {
-        // this.setState({
-        //     counter: this.state.counter + 1
-        // })
-
-        this.setState(oldState => ({
-            counter: oldState.counter + 1,
-            username: "Admin "
-        }))
-    }
-
-    updateUsername = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
     }
 
     render() {
-        if (this.props.menu === "home") {
-            return (
-                <div style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexDirection: "column"
-                }}>
-                    <div>
-                        <div>{this.state.username1}</div>
-                        <div>{this.state.password}</div>
-                        <button onClick={this.changeButton}>5</button>
-                        <span>{this.state.counter}</span>
-                        <button onClick={this.plusOneButton}>+1</button>
-                    </div>
-                    <div>
-                        <div>
-                            <span>Username</span>
-                            <input type="text" name="username1" onChange={this.updateUsername} />
-                        </div>
-                        <div>
-                            <span>Password</span>
-                            <input type="password" name="password" onChange={this.updateUsername} />
-                        </div>
-                    </div>
-                </div >
-            );
-        }
+        if (this.props.menu === "login")
+            return <Login />
 
-        if (this.props.menu === "contact") {
-            return <>
-                <h1>Contact</h1>
-                <button onClick={() => this.props.goToPage("home")}>Go To Home</button>
-            </>
-        }
+        if (this.props.menu === "contact")
+            return <Contact />
 
-        return <h1>Log In</h1>
+        return <Home />
     }
 }
 

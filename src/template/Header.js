@@ -11,9 +11,7 @@ class Header extends Component {
             <div style={{
                 height: 120,
                 backgroundColor: 'lightgray'
-            }}>
-
-            </div>
+            }} />
         );
     }
 }
