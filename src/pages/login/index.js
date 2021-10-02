@@ -10,6 +10,7 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
+            address: "",
             isLogin: false
         }
     }
@@ -33,6 +34,14 @@ class Login extends Component {
             this.setState({ isLogin: true })
             this.resetForm()
         } else alert("Invalid username or password!!")
+    }
+
+    registerButton = () => {
+        const { username, password, address } = this.state
+        const newUser = {
+            username, password, address
+        }
+        this.props.addData(newUser)
     }
 
     render() {
@@ -59,8 +68,16 @@ class Login extends Component {
                         change={this.setValue}
                         valueState={this.state.password}
                     />
+                    <RowInput
+                        label="Address"
+                        type="text"
+                        name="address"
+                        change={this.setValue}
+                        valueState={this.state.address}
+                    />
                     <div className="row-button">
                         <button onClick={this.loginButton}>Log In</button>
+                        <button onClick={this.registerButton}>Register</button>
                     </div>
                 </div>
             </div>

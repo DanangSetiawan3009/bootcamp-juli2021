@@ -40,9 +40,17 @@ export default App
  *        - Navbar
  *              - Menu
  *        - Content
- *              - Login
- *              - Contact
+ *              - Login = form
+ *              - Contact = table
  *              - Home
+ *
+ *
+ * Latihan Regis Data:
+ *      - Naikan data ke parent antara Login dan Contact
+ *      - Kirim function untuk addData ke Login
+ *      - Tambahkan parameter pada function addData
+ *      - Pada function addData di Content, terima parameter kiriman Login
+ *      - setState newData (data yang sudah disisipkan data baru) ke dalam state data
  *
  * Tugas:
  *      - Convert web list user ke dalam React (tanpa jsonplaceholder/data html biasa)
