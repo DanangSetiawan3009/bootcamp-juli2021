@@ -59,4 +59,9 @@ export default App
  *      - Buat Home page
  *      - Buat form login
  *          - user "admin" dan password "1234" make redirect ke home, selain itu alert "Salah username / password"
+ *
+ * Tugas:
+ *      - Buat fitur Update & Delete
+ *      - Setiap data yang ada di list, harus bisa login
+ *      - Sebelum login, halaman Contact tidak bisa dibuka/hidden
  */
