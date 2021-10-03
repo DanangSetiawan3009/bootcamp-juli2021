@@ -11,7 +11,8 @@ class Login extends Component {
             username: "",
             password: "",
             address: "",
-            isLogin: false
+            isLogin: false,
+            isUpdate: false
         }
     }
 
@@ -44,12 +45,23 @@ class Login extends Component {
         this.props.addData(newUser)
     }
 
+    updateButton = () => {
+        const { username, password, address } = this.state
+        const newUser = {
+            username, password, address
+        }
+        this.props.editData(newUser)
+    }
+
     componentDidMount() {
         console.log(this.props.editUser);
         const { username, password, address } = this.props.editUser
-        this.setState({
-            username, password, address
-        })
+        if (username && password && address) {
+            this.setState({
+                username, password, address,
+                isUpdate: true
+            })
+        }
     }
 
     render() {
@@ -85,7 +97,13 @@ class Login extends Component {
                     />
                     <div className="row-button">
                         <button onClick={this.loginButton}>Log In</button>
-                        <button onClick={this.registerButton}>Register</button>
+                        {
+                            this.state.isUpdate
+                                ?
+                                <button onClick={this.updateButton}>Update</button>
+                                :
+                                <button onClick={this.registerButton}>Register</button>
+                        }
                     </div>
                 </div>
             </div>

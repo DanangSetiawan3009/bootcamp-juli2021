@@ -7,7 +7,7 @@ class Content extends Component {
         super(props);
         this.state = {
             data: [],
-            selectedUser: {}
+            selectedUser: -1
         }
     }
 
@@ -20,9 +20,21 @@ class Content extends Component {
         this.props.goToPage("contact")
     }
 
-    updateSelectedUser = user => {
+    editButton = newUser => {
+        // data unique => findIndex
+        const { selectedUser, data: oldData } = this.state
+
+        oldData.splice(selectedUser, 1, newUser)
         this.setState({
-            selectedUser: user
+            data: oldData,
+            selectedUser: -1
+        })
+        this.props.goToPage("contact")
+    }
+
+    updateSelectedUser = idx => {
+        this.setState({
+            selectedUser: idx
         })
         this.props.goToPage("login")
     }
@@ -47,8 +59,9 @@ class Content extends Component {
     }
 
     render() {
+        const dataEdit = this.state.selectedUser >= 0 ? this.state.data[this.state.selectedUser] : {}
         if (this.props.menu === "login")
-            return <Login addData={this.addButton} editUser={this.state.selectedUser} />
+            return <Login addData={this.addButton} editData={this.editButton} editUser={dataEdit} />
 
         if (this.props.menu === "contact")
             return <Contact users={this.state.data} setUser={this.updateSelectedUser} />

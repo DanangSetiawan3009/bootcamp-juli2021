@@ -18,7 +18,7 @@ class Contact extends Component {
                 <td>{user.username}</td>
                 <td>{user.address}</td>
                 <td>
-                    <button onClick={() => this.props.setUser(user)}>Update</button>
+                    <button onClick={() => this.props.setUser(idx)}>Update</button>
                 </td>
                 <td>
                     <button>Delete</button>
