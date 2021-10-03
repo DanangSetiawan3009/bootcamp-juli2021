@@ -64,4 +64,9 @@ export default App
  *      - Buat fitur Update & Delete
  *      - Setiap data yang ada di list, harus bisa login
  *      - Sebelum login, halaman Contact tidak bisa dibuka/hidden
+ *
+ * Solution:
+ *      - Buat kolom action pada table list
+ *      - Buat tombol update & delete,
+ *      - Buat function untuk masing-masing button
  */

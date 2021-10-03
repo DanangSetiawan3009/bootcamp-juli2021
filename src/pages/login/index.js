@@ -44,6 +44,14 @@ class Login extends Component {
         this.props.addData(newUser)
     }
 
+    componentDidMount() {
+        console.log(this.props.editUser);
+        const { username, password, address } = this.props.editUser
+        this.setState({
+            username, password, address
+        })
+    }
+
     render() {
         return (
             <div className="login-containter">

@@ -6,6 +6,30 @@ class Content extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            data: [],
+            selectedUser: {}
+        }
+    }
+
+    addButton = newUser => {
+        const newData = this.state.data
+        newData.push(newUser)
+        this.setState({
+            data: newData
+        })
+        this.props.goToPage("contact")
+    }
+
+    updateSelectedUser = user => {
+        this.setState({
+            selectedUser: user
+        })
+        this.props.goToPage("login")
+    }
+
+    componentDidMount() {
+        // fetch API terus update state
+        this.setState({
             data: [{
                 username: "Admin",
                 password: "1234",
@@ -19,24 +43,15 @@ class Content extends Component {
                 password: "1234",
                 address: "Depok"
             }]
-        }
-    }
-
-    addButton = newUser => {
-        const newData = this.state.data
-        newData.push(newUser)
-        this.setState({
-            data: newData
         })
-        this.props.goToPage("contact")
     }
 
     render() {
         if (this.props.menu === "login")
-            return <Login addData={this.addButton} />
+            return <Login addData={this.addButton} editUser={this.state.selectedUser} />
 
         if (this.props.menu === "contact")
-            return <Contact users={this.state.data} />
+            return <Contact users={this.state.data} setUser={this.updateSelectedUser} />
 
         return <Home />
     }
