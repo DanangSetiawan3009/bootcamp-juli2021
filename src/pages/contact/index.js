@@ -31,7 +31,8 @@ class Contact extends Component {
 
     componentDidMount() {
         this.idInterval = setInterval(() => {
-            console.log("ini interval");
+            // console.log("ini interval");
+            // get api agar data selalu update dengan server
         }, 1000)
     }
 

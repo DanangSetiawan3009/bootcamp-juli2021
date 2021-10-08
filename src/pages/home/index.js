@@ -1,38 +1,43 @@
 import React, { Component } from 'react';
-
+import { Carousel } from '../../components';
+import { Skeleton, Stack } from '@mui/material'
 
 
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            username1: "",
+            button: 1,
+            loading: true
+        }
     }
+
+    componentDidMount() {
+        setTimeout(() => {
+            this.setState({ loading: false })
+        }, 5000)
+    }
+
     render() {
         return (
             <div style={{
                 display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "column"
+                justifyContent: "center"
             }}>
-                <div>
-                    <div>{this.state.username1}</div>
-                    <div>{this.state.password}</div>
-                    <button onClick={this.changeButton}>5</button>
-                    <span>{this.state.counter}</span>
-                    <button onClick={this.plusOneButton}>+1</button>
-                </div>
-                <div>
-                    <div>
-                        <span>Username</span>
-                        <input type="text" name="username1" onChange={this.updateUsername} />
+                {this.state.loading ?
+                    <Stack spacing={1}>
+                        <Skeleton variant="rectangular" width={600} height={400} />
+                    </Stack>
+                    :
+                    <div style={{
+                        width: 600,
+                        height: 400
+                    }}>
+                        <Carousel />
                     </div>
-                    <div>
-                        <span>Password</span>
-                        <input type="password" name="password" onChange={this.updateUsername} />
-                    </div>
-                </div>
-            </div >
+                }
+            </div>
         );
     }
 }

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 // import Navbar from './template/Navbar';
 // import Content from './template/Content';
 import { Header, Navbar, Content } from "./template"
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
 
 class App extends Component {
