@@ -59,14 +59,18 @@ class Login extends Component {
 
     componentDidMount() {
         console.error(this.props);
-        // console.log(this.props.editUser);
-        const { username, password, address } = this.props.editUser
-        if (username && password && address) {
-            this.setState({
-                username, password, address,
-                isUpdate: true
-            })
-        }
+        const { idUser } = this.props.match.params
+        console.log("iduser", idUser);
+        console.log("users", this.props.users);
+        const selectedUser = this.props.users.find(user => user.id === idUser)
+        console.log("selectedUser:", selectedUser);
+        // const { username, password, address } = this.props.editUser
+        // if (username && password && address) {
+        //     this.setState({
+        //         username, password, address,
+        //         isUpdate: true
+        //     })
+        // }
     }
 
     render() {

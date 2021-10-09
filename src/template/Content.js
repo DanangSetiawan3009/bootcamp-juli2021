@@ -47,11 +47,7 @@ class Content extends Component {
         // fetch API terus update state
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
-            .then(json => {
-
-                this.state.data.splice(0, 1)
-
-            })
+            .then(json => this.setState({ data: json }))
     }
 
     render() {
@@ -62,20 +58,50 @@ class Content extends Component {
             <Switch>
                 <Route path="/" exact component={Home} />
                 {
-                    // this.state.isLogin &&
-                    <Route path="/contact">
-                        <Contact
-                            users={this.state.data}
-                            setUser={this.updateSelectedUser}
-                            statusLogin={this.state.isLogin}
-                        />
-                    </Route>}
+                    /* {
+                        // this.state.isLogin &&
+                        <Route path="/contact">
+                            <Contact
+                                users={this.state.data}
+                                setUser={this.updateSelectedUser}
+                                statusLogin={this.state.isLogin}
+                            />
+                        </Route>} */
+                }
+                <Route
+                    path="/contact"
+                    children={
+                        (props) =>
+                            <Contact
+                                {...props}
+                                users={this.state.data}
+                                setUser={this.updateSelectedUser}
+                                statusLogin={this.state.isLogin}
+                            />
+                    }
+                />
+                <Route
+                    path="/login/:idUser"
+                    children={
+                        (props) =>
+                            <Login
+                                {...props}
+                                users={this.state.data}
+                                statusLogin={this.state.isLogin}
+                                doLogin={this.updateLogin}
+                                addData={this.addButton}
+                                editData={this.editButton}
+                                editUser={dataEdit}
+                            />
+                    }
+                />
                 <Route
                     path="/login"
                     children={
                         (props) =>
                             <Login
                                 {...props}
+                                users={this.state.data}
                                 statusLogin={this.state.isLogin}
                                 doLogin={this.updateLogin}
                                 addData={this.addButton}

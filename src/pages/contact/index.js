@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 
 
@@ -17,9 +17,9 @@ class Contact extends Component {
             return <tr key={idx}>
                 <td>{idx + 1}</td>
                 <td>{user.username}</td>
-                <td>{user.address}</td>
+                <td>{user.address?.city}</td>
                 <td>
-                    <button onClick={() => this.props.setUser(idx)}>Update</button>
+                    <button onClick={() => this.props.history.push("/login/" + user.id)}>Update</button>
                 </td>
                 <td>
                     <button>Delete</button>

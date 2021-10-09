@@ -79,4 +79,8 @@ export default App
  * Latihan:
  *      - Minimal Gunakan 3 UI Frameworks
  *      - Minimal menggunakan 1 component per Frameworks
+ *
+ *
+ * Latihan:
+ *      - Implementasikan Edit user tanpa menggunakan state & props (untuk data yang di edit)
  */
