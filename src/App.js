@@ -83,4 +83,9 @@ export default App
  *
  * Latihan:
  *      - Implementasikan Edit user tanpa menggunakan state & props (untuk data yang di edit)
+ *
+ *
+ * Tugas:
+ *      - Buatlah login yang sudah terintegrasi dengan Backend
+ *      - Buatlah 1 halaman profile yang menampilkan profile user yang login
  */

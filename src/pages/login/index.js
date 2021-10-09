@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { CircularProgress } from '@mui/material';
 import { RowInput } from "../../components"
 import "./login.css"
 
@@ -12,8 +13,10 @@ class Login extends Component {
             password: "",
             address: "",
             // isLogin: false,
-            isUpdate: false
+            isUpdate: false,
+            stop: false
         }
+        // this.stop = false
     }
 
     setValue = e => {
@@ -57,25 +60,32 @@ class Login extends Component {
         this.props.editData(newUser)
     }
 
-    componentDidMount() {
-        console.error(this.props);
+    fullfillField = () => {
         const { idUser } = this.props.match.params
-        console.log("iduser", idUser);
-        console.log("users", this.props.users);
-        const selectedUser = this.props.users.find(user => user.id === idUser)
-        console.log("selectedUser:", selectedUser);
-        // const { username, password, address } = this.props.editUser
-        // if (username && password && address) {
-        //     this.setState({
-        //         username, password, address,
-        //         isUpdate: true
-        //     })
-        // }
+        console.log("idUser", idUser);
+
+        const { username, address } = this.props.users.find(user => user.id === parseInt(idUser))
+
+        // this.stop = true
+        this.setState({
+            username, address: address?.city,
+            stop: true
+        })
+    }
+
+    componentDidMount() {
     }
 
     render() {
+        if (this.props.isLoading) {
+            return <div className="login-containter">
+                <CircularProgress disableShrink />
+            </div>
+        }
+
         return (
             <div className="login-containter">
+                {!this.state.stop && this.fullfillField()}
                 <fieldset>
                     <legend>Value</legend>
                     <h1>Username: {this.state.username}</h1>

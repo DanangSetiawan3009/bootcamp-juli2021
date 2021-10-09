@@ -9,7 +9,8 @@ class Content extends Component {
         this.state = {
             data: [],
             selectedUser: -1,
-            isLogin: false
+            isLogin: false,
+            isLoading: true
         }
     }
 
@@ -47,7 +48,7 @@ class Content extends Component {
         // fetch API terus update state
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
-            .then(json => this.setState({ data: json }))
+            .then(json => this.setState({ data: json, isLoading: false }))
     }
 
     render() {
@@ -86,6 +87,7 @@ class Content extends Component {
                         (props) =>
                             <Login
                                 {...props}
+                                isLoading={this.state.isLoading}
                                 users={this.state.data}
                                 statusLogin={this.state.isLogin}
                                 doLogin={this.updateLogin}
