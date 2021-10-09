@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { Home, Contact, Login } from "../pages"
 
 
@@ -7,9 +8,12 @@ class Content extends Component {
         super(props);
         this.state = {
             data: [],
-            selectedUser: -1
+            selectedUser: -1,
+            isLogin: false
         }
     }
+
+    updateLogin = status => this.setState({ isLogin: status })
 
     addButton = newUser => {
         const newData = this.state.data
@@ -21,7 +25,6 @@ class Content extends Component {
     }
 
     editButton = async newUser => {
-        // data unique => findIndex
         const { selectedUser, data: oldData } = this.state
 
         oldData.splice(selectedUser, 1, newUser)
@@ -34,7 +37,6 @@ class Content extends Component {
     }
 
     updateSelectedUser = idx => {
-        // a.push()
         this.setState({
             selectedUser: idx
         }, () => { })
@@ -48,30 +50,44 @@ class Content extends Component {
             .then(json => {
 
                 this.state.data.splice(0, 1)
-                this.state.selectedUser = 10000
 
-                // this.setState({
-                //     data: json
-                // })
             })
-        // this.setState({
-        //     data: [{
-        //         username: "Admin",
-        //         password: "1234",
-        //         address: "Jakarta"
-        //     }, {
-        //         username: "User",
-        //         password: "1234",
-        //         address: "Bogor"
-        //     }, {
-        //         username: "Operator",
-        //         password: "1234",
-        //         address: "Depok"
-        //     }]
-        // })
     }
 
     render() {
+        const dataEdit = this.state.selectedUser >= 0 ?
+            this.state.data[this.state.selectedUser] :
+            {}
+        return (
+            <Switch>
+                <Route path="/" exact component={Home} />
+                {
+                    // this.state.isLogin &&
+                    <Route path="/contact">
+                        <Contact
+                            users={this.state.data}
+                            setUser={this.updateSelectedUser}
+                            statusLogin={this.state.isLogin}
+                        />
+                    </Route>}
+                <Route
+                    path="/login"
+                    children={
+                        (props) =>
+                            <Login
+                                {...props}
+                                statusLogin={this.state.isLogin}
+                                doLogin={this.updateLogin}
+                                addData={this.addButton}
+                                editData={this.editButton}
+                                editUser={dataEdit}
+                            />
+                    }
+                />
+                <Route children={() => <h1>Page Not Found!!</h1>} />
+            </Switch>
+        )
+        /*
         if (this.props.menu === "login") {
             const dataEdit = this.state.selectedUser >= 0 ? this.state.data[this.state.selectedUser] : {}
             return <Login addData={this.addButton} editData={this.editButton} editUser={dataEdit} />
@@ -81,6 +97,7 @@ class Content extends Component {
             return <Contact users={this.state.data} setUser={this.updateSelectedUser} />
 
         return <Home />
+        */
     }
 }
 

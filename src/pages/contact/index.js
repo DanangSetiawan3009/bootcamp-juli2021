@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
 
 
@@ -30,6 +31,7 @@ class Contact extends Component {
     }
 
     componentDidMount() {
+        console.warn(this.props)
         this.idInterval = setInterval(() => {
             // console.log("ini interval");
             // get api agar data selalu update dengan server
@@ -41,6 +43,9 @@ class Contact extends Component {
     }
 
     render() {
+        // if (!this.props.statusLogin)
+        //     return <Redirect to="/" />
+
         return (
             <>
                 <table width="400px" border="1px" cellPadding="10px">

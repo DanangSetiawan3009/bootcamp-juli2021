@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 // import Header from './template/Header';
 // import Navbar from './template/Navbar';
 // import Content from './template/Content';
@@ -23,11 +24,14 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <Router>
         <Header />
         <Navbar goToPage={this.changePage} />
-        <Content menu={this.state.menu} goToPage={this.changePage} />
-      </>
+        <Content
+          menu={this.state.menu}
+          goToPage={this.changePage}
+        />
+      </Router>
     );
   }
 }
@@ -70,4 +74,9 @@ export default App
  *      - Buat kolom action pada table list
  *      - Buat tombol update & delete,
  *      - Buat function untuk masing-masing button
+ *
+ *
+ * Latihan:
+ *      - Minimal Gunakan 3 UI Frameworks
+ *      - Minimal menggunakan 1 component per Frameworks
  */

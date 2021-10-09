@@ -14,6 +14,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props);
         setTimeout(() => {
             this.setState({ loading: false })
         }, 5000)

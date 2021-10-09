@@ -18,9 +18,9 @@ class Navbar extends Component {
                 gap: 10,
                 alignItems: "center"
             }}>
-                <Menu color="red" fn={() => this.props.goToPage("home")}>Home</Menu>
-                <Menu color="green" fn={() => this.props.goToPage("contact")}>Contact</Menu>
-                <Menu color="blue" fn={() => this.props.goToPage("login")}>Log In</Menu>
+                <Menu color="red" target="/">Home</Menu>
+                {/* <Menu color="green" target="/contact">Contact</Menu> */}
+                <Menu color="blue" target="/login">Log In</Menu>
             </div>
         );
     }

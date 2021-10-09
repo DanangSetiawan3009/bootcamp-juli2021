@@ -11,7 +11,7 @@ class Login extends Component {
             username: "",
             password: "",
             address: "",
-            isLogin: false,
+            // isLogin: false,
             isUpdate: false
         }
     }
@@ -29,11 +29,15 @@ class Login extends Component {
         })
     }
 
+    goToContactPage = () => this.props.history.push("/contact")
+
     loginButton = () => {
         const { username, password } = this.state
         if (username === "admin" && password === "1234") { // Bagaimana caranya me-reset value input ketika login success
-            this.setState({ isLogin: true })
+            // this.setState({ isLogin: true })
+            this.props.doLogin(true)
             this.resetForm()
+            this.props.history.push("/")
         } else alert("Invalid username or password!!")
     }
 
@@ -54,7 +58,8 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.editUser);
+        console.error(this.props);
+        // console.log(this.props.editUser);
         const { username, password, address } = this.props.editUser
         if (username && password && address) {
             this.setState({
@@ -71,7 +76,7 @@ class Login extends Component {
                     <legend>Value</legend>
                     <h1>Username: {this.state.username}</h1>
                     <h1>Password: {this.state.password}</h1>
-                    <h1>Status Login: {this.state.isLogin.toString()}</h1>
+                    <h1>Status Login: {this.props.statusLogin.toString()}</h1>
                 </fieldset>
                 <div className="login-containter">
                     <RowInput
@@ -104,6 +109,7 @@ class Login extends Component {
                                 :
                                 <button onClick={this.registerButton}>Register</button>
                         }
+                        <button onClick={this.goToContactPage}>Go To Contact</button>
                     </div>
                 </div>
             </div>
