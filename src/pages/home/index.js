@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Carousel } from '../../components';
 import { Skeleton, Stack } from '@mui/material'
+import { connect } from 'react-redux';
 
 
 class Home extends Component {
@@ -26,6 +27,7 @@ class Home extends Component {
                 display: "flex",
                 justifyContent: "center"
             }}>
+                <h1>{this.props.username5}</h1>
                 {this.state.loading ?
                     <Stack spacing={1}>
                         <Skeleton variant="rectangular" width={600} height={400} />
@@ -43,4 +45,8 @@ class Home extends Component {
     }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+    username5: state.username
+})
+
+export default connect(mapStateToProps)(Home);

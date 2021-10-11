@@ -40,6 +40,7 @@ export default App
 
 /**
  * Tree Component:
+ * - Index
  *    - App
  *        - Header
  *        - Navbar
@@ -88,4 +89,8 @@ export default App
  * Tugas:
  *      - Buatlah login yang sudah terintegrasi dengan Backend
  *      - Buatlah 1 halaman profile yang menampilkan profile user yang login
+ *
+ * Latihan:
+ *      - Gunakan redux untuk menyimpan list user
+ *      - Gunakan redux untuk menyimpan statusLogin & userLogin
  */

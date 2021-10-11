@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CircularProgress } from '@mui/material';
 import { RowInput } from "../../components"
 import "./login.css"
+import { connect } from 'react-redux';
 
 
 
@@ -35,13 +36,15 @@ class Login extends Component {
     goToContactPage = () => this.props.history.push("/contact")
 
     loginButton = () => {
-        const { username, password } = this.state
-        if (username === "admin" && password === "1234") { // Bagaimana caranya me-reset value input ketika login success
-            // this.setState({ isLogin: true })
-            this.props.doLogin(true)
-            this.resetForm()
-            this.props.history.push("/")
-        } else alert("Invalid username or password!!")
+        // const { username, password } = this.state
+        // if (username === "admin" && password === "1234") { // Bagaimana caranya me-reset value input ketika login success
+        //     // this.setState({ isLogin: true })
+        //     this.props.doLogin(true)
+        //     this.resetForm()
+        //     this.props.history.push("/")
+        // } else alert("Invalid username or password!!")
+
+        this.props.loginHandler()
     }
 
     registerButton = () => {
@@ -85,7 +88,7 @@ class Login extends Component {
 
         return (
             <div className="login-containter">
-                {!this.state.stop && this.fullfillField()}
+                {/* {!this.state.stop && this.fullfillField()} */}
                 <fieldset>
                     <legend>Value</legend>
                     <h1>Username: {this.state.username}</h1>
@@ -131,4 +134,15 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    statusLogin: state.statusLogin
+})
+
+const mapDispatchToProps = dispatch => ({
+    loginHandler: () => dispatch({
+        type: "LOGIN_OKO",
+        payload: "user"
+    })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

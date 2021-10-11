@@ -89,11 +89,11 @@ class Content extends Component {
                                 {...props}
                                 isLoading={this.state.isLoading}
                                 users={this.state.data}
-                                statusLogin={this.state.isLogin}
+                                // statusLogin={this.state.isLogin}
                                 doLogin={this.updateLogin}
                                 addData={this.addButton}
                                 editData={this.editButton}
-                                editUser={dataEdit}
+                            // editUser={dataEdit}
                             />
                     }
                 />
@@ -104,11 +104,11 @@ class Content extends Component {
                             <Login
                                 {...props}
                                 users={this.state.data}
-                                statusLogin={this.state.isLogin}
+                                // statusLogin={this.state.isLogin}
                                 doLogin={this.updateLogin}
                                 addData={this.addButton}
                                 editData={this.editButton}
-                                editUser={dataEdit}
+                            // editUser={dataEdit}
                             />
                     }
                 />
