@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { CircularProgress } from '@mui/material';
-import { RowInput } from "../../components"
-import "./login.css"
 import { connect } from 'react-redux';
+import { decodeToken } from "react-jwt";
+import { RowInput } from "../../components"
+// import { actionHandlerLogin } from "../../redux/action"
+import "./login.css"
 
 
 
@@ -15,7 +17,8 @@ class Login extends Component {
             address: "",
             // isLogin: false,
             isUpdate: false,
-            stop: false
+            stop: false,
+            checked: false,
         }
         // this.stop = false
     }
@@ -36,7 +39,7 @@ class Login extends Component {
     goToContactPage = () => this.props.history.push("/contact")
 
     loginButton = () => {
-        // const { username, password } = this.state
+        const { username, password } = this.state
         // if (username === "admin" && password === "1234") { // Bagaimana caranya me-reset value input ketika login success
         //     // this.setState({ isLogin: true })
         //     this.props.doLogin(true)
@@ -44,7 +47,28 @@ class Login extends Component {
         //     this.props.history.push("/")
         // } else alert("Invalid username or password!!")
 
-        this.props.loginHandler()
+        // this.props.loginHandler(username)
+        fetch("http://localhost:8080/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: JSON.stringify({ username, password })
+        })
+            .then(async resp => {
+                const data = await resp.json()
+                const { status, msg, token } = data
+                if (status === "success") {
+                    localStorage.setItem("token", token) // for persistent login
+                    this.props.loginHandler(token)
+                } else {
+                    alert(msg)
+                }
+            })
+            .catch(err => {
+                console.warn(err)
+            })
     }
 
     registerButton = () => {
@@ -76,10 +100,24 @@ class Login extends Component {
         })
     }
 
+    checkValue = () => {
+        const { statusLogin1, token } = this.props
+        console.log(statusLogin1)
+        if (!statusLogin1) return
+
+        const decodedToken = decodeToken(token)
+        console.log(decodedToken)
+        this.setState({
+            username: decodedToken.username ?? "",
+            checked: true
+        })
+    }
+
     componentDidMount() {
     }
 
     render() {
+        if (!this.state.checked) this.checkValue()
         if (this.props.isLoading) {
             return <div className="login-containter">
                 <CircularProgress disableShrink />
@@ -93,7 +131,7 @@ class Login extends Component {
                     <legend>Value</legend>
                     <h1>Username: {this.state.username}</h1>
                     <h1>Password: {this.state.password}</h1>
-                    <h1>Status Login: {this.props.statusLogin.toString()}</h1>
+                    <h1>Status Login: {this.props.statusLogin1.toString()}</h1>
                 </fieldset>
                 <div className="login-containter">
                     <RowInput
@@ -134,15 +172,13 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => ({
-    statusLogin: state.statusLogin
+const mapStateToProps = state => ({ // state = {statusLogin: false, username: ""}
+    statusLogin1: state.statusLogin,
+    token: state.token
 })
 
 const mapDispatchToProps = dispatch => ({
-    loginHandler: () => dispatch({
-        type: "LOGIN_OKO",
-        payload: "user"
-    })
+    loginHandler: token => dispatch({ type: "LOGIN_OKO", payload: token })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

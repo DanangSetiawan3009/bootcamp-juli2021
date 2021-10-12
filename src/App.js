@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { connect } from "react-redux"
 // import Header from './template/Header';
 // import Navbar from './template/Navbar';
 // import Content from './template/Content';
@@ -22,6 +23,35 @@ class App extends Component {
     // console.log(page);
   }
 
+  componentDidMount() {
+    const token = localStorage.getItem("token")
+    if (token) {
+      fetch("http://localhost:8080/verify", {
+        method: "GET",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      })
+        .then(async resp => {
+          const data = await resp.json()
+          const { status, msg } = data
+          if (status === "success") {
+            this.props.loginHandler(token)
+          } else {
+            alert(msg)
+            localStorage.removeItem('token')
+          }
+        })
+        .catch(err => {
+          console.warn(err)
+          alert("Internal Server Error!")
+          localStorage.removeItem('token')
+        })
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -36,7 +66,11 @@ class App extends Component {
   }
 }
 
-export default App
+const mapDispatchToProps = dispatch => ({
+  loginHandler: token => dispatch({ type: "LOGIN_OKO", payload: token })
+})
+
+export default connect(null, mapDispatchToProps)(App);
 
 /**
  * Tree Component:

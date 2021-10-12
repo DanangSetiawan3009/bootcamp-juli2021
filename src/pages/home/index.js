@@ -27,7 +27,7 @@ class Home extends Component {
                 display: "flex",
                 justifyContent: "center"
             }}>
-                <h1>{this.props.username5}</h1>
+                <h1>{this.props.username56}</h1>
                 {this.state.loading ?
                     <Stack spacing={1}>
                         <Skeleton variant="rectangular" width={600} height={400} />
@@ -46,7 +46,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => ({
-    username5: state.username
+    username56: state.username
 })
 
 export default connect(mapStateToProps)(Home);

@@ -52,9 +52,9 @@ class Content extends Component {
     }
 
     render() {
-        const dataEdit = this.state.selectedUser >= 0 ?
-            this.state.data[this.state.selectedUser] :
-            {}
+        // const dataEdit = this.state.selectedUser >= 0 ?
+        //     this.state.data[this.state.selectedUser] :
+        //     {}
         return (
             <Switch>
                 <Route path="/" exact component={Home} />
