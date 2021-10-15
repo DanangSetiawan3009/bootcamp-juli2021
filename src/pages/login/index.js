@@ -5,10 +5,11 @@ import { decodeToken } from "react-jwt";
 import { RowInput } from "../../components"
 // import { actionHandlerLogin } from "../../redux/action"
 import "./login.css"
+import { FirebaseContext } from '../../firebase';
 
 
 
-class Login extends Component {
+class LoginFirebase extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -113,7 +114,19 @@ class Login extends Component {
         })
     }
 
-    componentDidMount() {
+    onRegisterFirebase = () => {
+        const { username, password } = this.state
+        this.props.firebase.createUser({
+            email: username, password
+        })
+            .then(userCredential => {
+                console.log("userCredential:", userCredential)
+                alert("User created!")
+            })
+            .catch(err => {
+                console.warn("ERROR:", err)
+                alert(err.message)
+            })
     }
 
     render() {
@@ -135,7 +148,7 @@ class Login extends Component {
                 </fieldset>
                 <div className="login-containter">
                     <RowInput
-                        label="Username"
+                        label="Email"
                         type="text"
                         name="username"
                         change={this.setValue}
@@ -166,8 +179,27 @@ class Login extends Component {
                         }
                         <button onClick={this.goToContactPage}>Go To Contact</button>
                     </div>
+                    <div className="row-button">
+                        <button onClick={this.onRegisterFirebase}>Register Firebase</button>
+                    </div>
                 </div>
             </div>
+        );
+    }
+}
+
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {}
+    }
+    render() {
+        return (
+            <FirebaseContext.Consumer>
+                {firebase =>
+                    <LoginFirebase {...this.props}
+                        firebase={firebase} />}
+            </FirebaseContext.Consumer>
         );
     }
 }
