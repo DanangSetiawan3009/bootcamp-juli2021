@@ -116,7 +116,7 @@ class LoginFirebase extends Component {
 
     onRegisterFirebase = () => {
         const { username, password } = this.state
-        this.props.firebase.createUser({
+        this.props.firebase2.createUser({
             email: username, password
         })
             .then(userCredential => {
@@ -130,12 +130,12 @@ class LoginFirebase extends Component {
     }
 
     render() {
-        if (!this.state.checked) this.checkValue()
-        if (this.props.isLoading) {
-            return <div className="login-containter">
-                <CircularProgress disableShrink />
-            </div>
-        }
+        // if (!this.state.checked) this.checkValue()
+        // if (this.props.isCheckingToken) {
+        //     return <div className="login-containter">
+        //         <CircularProgress disableShrink />
+        //     </div>
+        // }
 
         return (
             <div className="login-containter">
@@ -198,15 +198,16 @@ class Login extends Component {
             <FirebaseContext.Consumer>
                 {firebase =>
                     <LoginFirebase {...this.props}
-                        firebase={firebase} />}
+                        firebase2={firebase} />}
             </FirebaseContext.Consumer>
         );
     }
 }
 
 const mapStateToProps = state => ({ // state = {statusLogin: false, username: ""}
-    statusLogin1: state.statusLogin,
-    token: state.token
+    // 3
+    statusLogin1: state.loginRedux.statusLogin,
+    token: state.loginRedux.token
 })
 
 const mapDispatchToProps = dispatch => ({

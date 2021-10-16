@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 // import Header from './template/Header';
 // import Navbar from './template/Navbar';
 // import Content from './template/Content';
+import { CircularProgress } from '@mui/material';
 import { Header, Navbar, Content } from "./template"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css"
@@ -12,7 +13,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      menu: "home"
+      menu: "home",
+      isCheckingToken: true
     }
   }
 
@@ -23,7 +25,7 @@ class App extends Component {
     // console.log(page);
   }
 
-  componentDidMount() {
+  checkingToken = () => {
     const token = localStorage.getItem("token")
     if (token) {
       fetch("http://localhost:8080/verify", {
@@ -49,10 +51,21 @@ class App extends Component {
           alert("Internal Server Error!")
           localStorage.removeItem('token')
         })
-    }
+        .finally(() => this.setState({ isCheckingToken: false }))
+    } else this.setState({ isCheckingToken: false })
+  }
+
+  componentDidMount() {
+    setTimeout(this.checkingToken, 3000)
   }
 
   render() {
+    if (this.state.isCheckingToken) {
+      return <div className="login-containter">
+        <CircularProgress disableShrink />
+      </div>
+    }
+
     return (
       <Router>
         <Header />
