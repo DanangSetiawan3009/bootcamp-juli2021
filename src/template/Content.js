@@ -48,7 +48,12 @@ class Content extends Component {
         // fetch API terus update state
         fetch('https://jsonplaceholder.typicode.com/users')
             .then(response => response.json())
-            .then(json => this.setState({ data: json, isLoading: false }))
+            .then(json => {
+                this.setState({ data: json, isLoading: false })
+                return "oke"
+            })
+            .then(resp => console.log(resp))
+            .catch(err => console.log("ERROR:", err))
     }
 
     render() {
@@ -74,7 +79,7 @@ class Content extends Component {
                     children={
                         (props) =>
                             <Contact
-                                {...props}
+                                {...props} // history, location, match
                                 users={this.state.data}
                                 setUser={this.updateSelectedUser}
                                 statusLogin={this.state.isLogin}

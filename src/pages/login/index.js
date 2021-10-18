@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { CircularProgress } from '@mui/material';
 import { connect } from 'react-redux';
 import { decodeToken } from "react-jwt";
 import { RowInput } from "../../components"
@@ -59,6 +58,7 @@ class LoginFirebase extends Component {
         })
             .then(async resp => {
                 const data = await resp.json()
+                console.error(data)
                 const { status, msg, token } = data
                 if (status === "success") {
                     localStorage.setItem("token", token) // for persistent login
@@ -71,6 +71,8 @@ class LoginFirebase extends Component {
                 console.warn(err)
             })
     }
+
+
 
     registerButton = () => {
         const { username, password, address } = this.state
@@ -128,6 +130,27 @@ class LoginFirebase extends Component {
                 alert(err.message)
             })
     }
+
+    shouldComponentUpdate(props, state) {
+        console.log("props:", props)
+        console.log("state:", state)
+        // if (state.username !== "")
+        //     return true
+
+        return true
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+        console.log("prevProps", prevProps);
+        console.log("prevState", prevState.username);
+        return null
+    }
+
+    componentDidUpdate(newProps, newState) {
+        console.log("newProps", newProps);
+        console.log("newState", this.state.username);
+    }
+
 
     render() {
         // if (!this.state.checked) this.checkValue()

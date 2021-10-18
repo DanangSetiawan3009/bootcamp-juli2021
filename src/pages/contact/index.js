@@ -7,19 +7,21 @@ class Contact extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            users: []
         }
         this.idInterval = 0
     }
 
     renderList = () => {
-        const list = this.props.users.map((user, idx) => {
-            console.log("user:", user);
+        // console.log(this.state.users);
+        const list = this.state.users.map((user, idx) => {
+            // console.log("user:", user);
             return <tr key={idx}>
                 <td>{idx + 1}</td>
                 <td>{user.username}</td>
                 <td>{user.address?.city}</td>
                 <td>
-                    <button onClick={() => this.props.history.push("/login/" + user.id)}>Update</button>
+                    <button onClick={() => this.props.history.push("/login/" + idx)}>Update</button>
                 </td>
                 <td>
                     <button>Delete</button>
@@ -30,12 +32,42 @@ class Contact extends Component {
         return list
     }
 
+    fetchUsers = async () => {
+        try {
+            const token = localStorage.getItem('token')
+            const response = await fetch("http://localhost:8080/users", {
+                mode: "cors",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + token
+                }
+            })
+            const { data } = await response.json()
+            console.log("response:", data);
+            if (data) this.setState({ users: data })
+        } catch (err) {
+            console.log("ERROR:", err);
+        }
+    }
+
     componentDidMount() {
-        console.warn(this.props)
+        // this.fetchUsers()
+        console.warn(this.props.users)
+        // this.setState({
+        //     users: this.props.users
+        // })
         this.idInterval = setInterval(() => {
             // console.log("ini interval");
             // get api agar data selalu update dengan server
         }, 1000)
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log("props", props);
+        console.log("state", state);
+        return {
+            users: props.users
+        }
     }
 
     componentWillUnmount() {

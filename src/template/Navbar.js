@@ -19,7 +19,7 @@ class Navbar extends Component {
                 alignItems: "center"
             }}>
                 <Menu color="red" target="/">Home</Menu>
-                {/* <Menu color="green" target="/contact">Contact</Menu> */}
+                <Menu color="green" target="/contact">Contact</Menu>
                 <Menu color="blue" target="/login">Log In</Menu>
             </div>
         );

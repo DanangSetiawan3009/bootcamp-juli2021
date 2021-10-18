@@ -12,13 +12,23 @@ class Home extends Component {
             button: 1,
             loading: true
         }
+        this.intervalId = null
     }
 
     componentDidMount() {
         console.log(this.props);
         setTimeout(() => {
             this.setState({ loading: false })
-        }, 5000)
+        }, 1000)
+
+        let no = 1
+        this.intervalId = setInterval(() => {
+            console.log("ini set interval ke", no++);
+        }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.intervalId)
     }
 
     render() {

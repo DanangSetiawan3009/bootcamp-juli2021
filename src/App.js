@@ -91,11 +91,12 @@ export default connect(null, mapDispatchToProps)(App);
  *    - App
  *        - Header
  *        - Navbar
- *              - Menu
+ *              - Menu (Link to bisa di gunakan di luar Switch->Route tetapi harus di trigger via klik)
  *        - Content
  *              - Login = form
  *              - Contact = table
  *              - Home
+ *              (history.push bisa dipanggil secara dinamis tetapi harus dibawah Switch->Route)
  *
  *
  * Latihan Regis Data:
@@ -140,4 +141,31 @@ export default connect(null, mapDispatchToProps)(App);
  * Latihan:
  *      - Gunakan redux untuk menyimpan list user
  *      - Gunakan redux untuk menyimpan statusLogin & userLogin
+ *
+ *
+ *
+ *
+ * TEST:
+ *    Tugas:
+ *        - Buatlah Aplikasi untuk penjualan toko buku
+ *        - Buatlah aplikasi untuk penyewaan sepeda motor
+ *
+ *    TIM 1:
+ *        - Anggota: Aldin & Danang
+ *        - Tugas: Penyewaan Sepeda Motor
+ *    TIM 2:
+ *        - Anggota: Rahmat & Maruli
+ *        - Tugas: Toko Buku
+ *
+ *
+ * API Contract:
+ *        - Sukses:
+ *              - status: success
+ *              - ... (tergantung api: token, users)
+ *        - Gagal:
+ *              - status: failed
+ *              - msg
+ *
+ * TUGAS:
+ *      - Buatlah CRUD contact menggunakan firebase
  */
